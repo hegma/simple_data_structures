@@ -7,7 +7,7 @@
  *
  */
 
-#define RINGBUFFER_LENGTH 3
+#define CIRCULAR_BUFFER_LENGTH 3
 
 template <typename T>
 
@@ -19,22 +19,22 @@ public:
         this->circularBufferReadIndex = 0;
 
     };
-    void writeElementToRingBuffer( T  elementToAdd ){
+    void writeElementToCircularBuffer( T  elementToAdd ){
         this->Buffer[this->circularBufferWriteIndex] = elementToAdd ;    // put Task into current end position of the buffer
         this->circularBufferWriteIndex++;                                     // increment buffer end index
-        this->circularBufferWriteIndex %= RINGBUFFER_LENGTH ;                // wrap end index around the buffer length
+        this->circularBufferWriteIndex %= CIRCULAR_BUFFER_LENGTH ;                // wrap end index around the buffer length
     };
-    T readElementFromRingBuffer(){
+    T readElementFromCircluarBuffer(){
         T elementFromBuffer = this->Buffer[this->circularBufferReadIndex]; // read the task from the read index position
         this->circularBufferReadIndex++;
-        this->circularBufferReadIndex %= RINGBUFFER_LENGTH;
+        this->circularBufferReadIndex %= CIRCULAR_BUFFER_LENGTH;
         return elementFromBuffer;
     };
 
     int circularBufferWriteIndex;
     int circularBufferReadIndex;
 
-    T Buffer[RINGBUFFER_LENGTH ];
+    T Buffer[CIRCULAR_BUFFER_LENGTH];
 
 
 };
